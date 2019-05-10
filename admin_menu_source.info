@@ -1,0 +1,8 @@
+name = Administration Menu Source
+description = Use a different menu as the Administration Menu.
+dependencies[] = menu
+dependencies[] = admin_menu
+package = Administration
+backdrop = 1.x
+version = "1.x-1.x-dev"
+configure = admin/config/administration/admin_menu/source
