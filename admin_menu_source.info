@@ -1,7 +1,7 @@
 name = Administration Menu Source
 description = Use a different menu as the Administration Menu.
 dependencies[] = menu
-dependencies[] = admin_menu
+dependencies[] = admin_bar
 package = Administration
 backdrop = 1.x
 version = "1.x-1.x-dev"

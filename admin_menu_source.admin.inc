@@ -46,7 +46,12 @@ function admin_menu_source_settings() {
     $form['admin_menu_source_settings'][$role_key]['#weight'] =  isset($setting['weight']) ? $setting['weight'] : 0;
   }
 
-  $form = system_settings_form($form);
+  //$form = system_settings_form($form);
+  $form['actions']['#type'] = 'actions';
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save settings'),
+  );
 
   // Add a custom submit handler.
   $form['#submit'][] = 'admin_menu_source_settings_submit';
@@ -54,8 +59,8 @@ function admin_menu_source_settings() {
   return $form;
 }
 
-function admin_menu_source_settings_submit() {
-  $settings = _admin_menu_source_get_settings();
+function admin_menu_source_settings_submit($form, &$form_state) {
+  $settings = $form_state['input']['admin_menu_source_settings'];
 
   // Sort the settings based on their weight.
   uasort($settings, '_admin_menu_source_sort_by_roles');
@@ -68,7 +73,7 @@ function admin_menu_source_settings_submit() {
   }
 
   // re-save
-  variable_set('admin_menu_source_settings', $settings);
+  config_set('admin_menu_source.settings', 'admin_menu_source', $settings);
 
   // Flush admin_menu's cache.
   admin_bar_flush_caches();

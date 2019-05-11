@@ -109,6 +109,17 @@ function admin_menu_source_admin_bar_output_alter(&$content) {
 }
 
 /**
+* Implements hook_config_info().
+*/
+function admin_menu_source_config_info() {
+  $prefixes['admin_menu_source.settings'] = array(
+    'label' => t('Admin Menu Source settings'),
+    'group' => t('Configuration'),
+  );
+  return $prefixes;
+}
+
+/**
  * Returns HTML for a settings form.
  *
  * @param $variables
@@ -161,7 +172,7 @@ function theme_admin_menu_source_settings_form($variables) {
  * It appends new roles to the bottom (lowest priority)
  */
 function _admin_menu_source_get_settings() {
-  $settings = variable_get('admin_menu_source_settings', array());
+  $settings = config_get('admin_menu_source.settings', 'admin_menu_source', array());
 
   // make sure all roles are in
   $roles = array_keys(user_roles(TRUE, 'access administration bar'));
